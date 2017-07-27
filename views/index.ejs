@@ -21,33 +21,34 @@
 
 <body ng-controller="todoController">
     <div class="container">
-        <div class="jumbotron text-center">
+        <div class="jumbotron text-center col-sm-12">
             <h1>{{ appName }} <span class="label label-info">{{ todos.length }}</span></h1>
         </div>
-    </div>
 
-    <div id="todo-list" class="row">
-        <div class="col-sm-6 col-sm-offset-3">
-            <div class="checkbox" ng-repeat="todo in todos">
-                <input type="checkbox" ng-model="todo.isDone" ng-change="updateTodo(todo)">
-                <a href ng-click="deleteTodo(todo)"><i class="fa fa-remove"></i></a>
-                <a href ng-click="textBtnform.$show()" ng-hide="textBtnform.$visible"><i class="fa fa-edit"></i></a>
-                <span ng-class="{strike: todo.isDone}" editable-text="todo.thongtin" e-form="textBtnform" onaftersave="updateTodo(todo)">{{ todo.thongtin }}</span>
-            </div>
-            <p class="text-center" ng-show="loading">
-                <span class="fa fa-spinner fa-spin fa-3x"></span>
-            </p>
-        </div>
-    </div>
 
-    <div id="todo-form" class="row">
-        <div class="col-sm-8 col-sm-offset-2 text-center">
-            <form>
-                <div class="form-group">
-                    <input type="text" class="form-control input-lg text-center" ng-model="formData.thongtin" placeholder="Nhập công việc của bạn">
+        <div id="todo-list">
+            <div class="col-sm-6 col-sm-offset-3">
+                <div class="checkbox" ng-repeat="todo in todos">
+                    <input type="checkbox" ng-model="todo.isDone" ng-change="updateTodo(todo)">
+                    <a href ng-click="deleteTodo(todo)"><i class="fa fa-remove"></i></a>
+                    <a href ng-click="textBtnform.$show()" ng-hide="textBtnform.$visible"><i class="fa fa-edit"></i></a>
+                    <span ng-class="{strike: todo.isDone}" editable-text="todo.thongtin" e-form="textBtnform" onaftersave="updateTodo(todo)">{{ todo.thongtin }}</span>
                 </div>
-                <button type="submit" ng-disabled="!formData.thongtin" ng-click="createTodo()" class="btn btn-primary btn-lg">Thêm</button>
-            </form>
+                <p class="text-center" ng-show="loading">
+                    <span class="fa fa-spinner fa-spin fa-3x"></span>
+                </p>
+            </div>
+        </div>
+
+        <div id="todo-form" class="row">
+            <div class="col-sm-8 col-sm-offset-2 text-center">
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control input-lg text-center" ng-model="formData.thongtin" placeholder="Nhập công việc của bạn">
+                    </div>
+                    <button type="submit" ng-disabled="!formData.thongtin" ng-click="createTodo()" class="btn btn-primary btn-lg">Thêm</button>
+                </form>
+            </div>
         </div>
     </div>
 </body>
