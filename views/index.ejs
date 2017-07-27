@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app.todos">
+
+<head>
+    <title>Todos List</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--Load CDN style-->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/css/xeditable.min.css">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!--Load CDN script-->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.0/js/xeditable.min.js"></script>
+    <!--Load app-->
+    <script src="assets/js/main/app.js"></script>
+    <script src="assets/js/main/services/svTodos.js"></script>
+</head>
+
+<body ng-controller="todoController">
+    <div class="container">
+        <div class="jumbotron text-center">
+            <h1>{{ appName }} <span class="label label-info">{{ todos.length }}</span></h1>
+        </div>
+    </div>
+
+    <div id="todo-list" class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div class="checkbox" ng-repeat="todo in todos">
+                <input type="checkbox" ng-model="todo.isDone" ng-change="updateTodo(todo)">
+                <a href ng-click="deleteTodo(todo)"><i class="fa fa-remove"></i></a>
+                <a href ng-click="textBtnform.$show()" ng-hide="textBtnform.$visible"><i class="fa fa-edit"></i></a>
+                <span ng-class="{strike: todo.isDone}" editable-text="todo.thongtin" e-form="textBtnform" onaftersave="updateTodo(todo)">{{ todo.thongtin }}</span>
+            </div>
+            <p class="text-center" ng-show="loading">
+                <span class="fa fa-spinner fa-spin fa-3x"></span>
+            </p>
+        </div>
+    </div>
+
+    <div id="todo-form" class="row">
+        <div class="col-sm-8 col-sm-offset-2 text-center">
+            <form>
+                <div class="form-group">
+                    <input type="text" class="form-control input-lg text-center" ng-model="formData.thongtin" placeholder="Nhập công việc của bạn">
+                </div>
+                <button type="submit" ng-disabled="!formData.thongtin" ng-click="createTodo()" class="btn btn-primary btn-lg">Thêm</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
